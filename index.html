@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>canvas teris</title>
+    <link ref="manifest" href="manifest.json">
 
     <style>
         #canvas {
@@ -14,7 +15,7 @@
         }
         
         .controls {
-            
+
         }
     </style>
 </head>
@@ -24,7 +25,16 @@
 
     <div class="controls"></div>
 
-    <script src="./dist/tetris.js"></script>
+    <script>
+        if (navigator.serviceWorker != null) {
+            navigator.serviceWorker.register('/tetris/sw.js')
+                .then(function (registration) {
+                    console.log('Registered events at scope: ', registration.scope)
+                })
+        }
+    </script>
+
+    <script src="./dist/tetris.min.js"></script>
 
     <script>
         var ctx = document.getElementById('canvas').getContext('2d')

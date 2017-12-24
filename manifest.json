@@ -1,0 +1,15 @@
+{
+    "name": "Canvas Tetris by klouskingsley",,
+    "short_name": "Tetris",
+    "display": "standalone",
+    "start_url": "/tetris",
+    "theme_color": "#88f",
+    "background_color": "#aaf",
+    "icons": [
+        {
+            "src": "icon.jpg",
+            "size": "256x256",
+            "type": "image/jpeg"
+        }
+    ]
+}
