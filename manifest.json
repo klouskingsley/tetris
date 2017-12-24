@@ -1,5 +1,5 @@
 {
-    "name": "Canvas Tetris by klouskingsley",,
+    "name": "Canvas Tetris by klouskingsley",
     "short_name": "Tetris",
     "display": "standalone",
     "start_url": "./index.html?utm_source=homescreen",
