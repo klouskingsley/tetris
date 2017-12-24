@@ -1,8 +1,50 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.Game = factory());
+	(global.Tetris = factory());
 }(this, (function () { 'use strict';
+
+/**
+ * 0,
+ *          **
+ *          **
+ * 
+ * 1,       
+ * 
+ *          *       *                *
+ *         ***      **     ***      **
+ *                  *       *        *
+ * 
+ * 2,
+ *         ****     *
+ *                  *
+ *                  *
+ *                  *
+ * 
+ * 3,
+ * 
+ *                  
+ *            *     *       ***     **
+ *          ***     *       *        *
+ *                  **               *
+ * 
+ * 4,
+ *          *       **      ***       *
+ *          ***     *         *       *
+ *                  *                **
+ * 
+ * 5,       
+ *          **          *
+ *           **        **
+ *                     *
+ * 
+ * 6,
+ *           **         *
+ *          **          **
+ *                       *
+ */
+
+
 
 var eleInfoMap = {
     0: {

@@ -3,7 +3,7 @@
 # Install
 
 ```html
-<script src="dist/index.js"></script>
+<script src="dist/tetris.js"></script>
 ```
 
 # Usage
