@@ -2,7 +2,7 @@
   "name": "tetris",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "dist/tetris.js",
   "devDependencies": {
     "rollup": "^0.52.2",
     "rollup-watch": "^4.3.1",
