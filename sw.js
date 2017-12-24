@@ -1,4 +1,4 @@
-var cacheKey = 'canvas_tetris'
+var cacheKey = 'canvas_tetris_201712250145'
 
 var cacheList = [
     '/tetris',
