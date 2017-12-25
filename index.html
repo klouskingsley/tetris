@@ -9,20 +9,104 @@
     <style>
         #canvas {
             display: block;
-            margin: 50px auto;
+            margin-top: 20px;
             box-shadow: 0 0 3px rgba(0,0,0,.4);
         }
         
         .controls {
-
+            position: relative;
+            margin: 30px auto 0 auto;
+            width: 300px;
+            height: 200px;
         }
+
+        .game-container {
+            position: relative;
+            margin: 0 auto;
+            width: 300px;
+            height: 400px;
+        }
+
+        .next {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            width: 80px;
+        }
+
+        .next p {
+            margin: 10px 0 0 0;
+        }
+
+        .score {
+            position: absolute;
+            top: 120px;
+            right: 10px;
+            width: 80px;
+        }
+
+        .btn {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            outline: 0;
+            border: 0;
+            box-shadow: 0 2px 2px rgba(0,0,0,.4);
+        }
+
+        .btn-left {
+            left: 0;
+            top: 70px;
+        }
+
+        .btn-right {
+            right: 0;
+            top: 70px;
+        }
+
+        .btn-top {
+            width: 80px;
+            height: 80px;
+            top: 0;
+            left: 110px;
+        }
+
+        .btn-bottom {
+            width: 80px;
+            height: 80px;
+            bottom: 0;
+            left: 110px;
+        }
+
     </style>
 </head>
 <body>
     
-    <canvas id="canvas" width="200" height="400"></canvas>
+    
 
-    <!-- <div class="controls" style="width: 400px; height: 400px; background: #f00;" id="controls"></div> -->
+    <div class="game-container">
+        <canvas id="canvas" width="200" height="400"></canvas>
+
+        <div class="next">
+            <p>Next</p>
+
+            <canvas id="nextEle" width="80" height="80" style="margin-top: 20px;"></canvas>
+        </div>
+
+        <div class="score">
+            <p>Score</p>
+            <p id="score">0</p>
+        </div>
+
+    </div>
+
+    <div id="controls" class="controls">
+        <input type="button" value="" class="btn btn-left" id="leftbtn">
+        <input type="button" value="" class="btn btn-top" id="changebtn">
+        <input type="button" value="" class="btn btn-bottom" id="downbtn">
+        <input type="button" value="" class="btn btn-right" id="rightbtn">
+    </div>
 
     <script>
         // if (navigator.serviceWorker != null) {
@@ -39,6 +123,8 @@
 
     <script>
         var ctx = document.getElementById('canvas').getContext('2d')
+        var nextEleCtx = document.getElementById('nextEle').getContext('2d')
+        var scoreEle = document.getElementById('score')
         var g = new Tetris({
             ctx: ctx,
             speed: 1.5
@@ -46,35 +132,48 @@
 
         g.start()
 
-        g.on('score', console.log)
+        g.on('score', function (score) {
+            scoreEle.innerHTML = +scoreEle.innerHTML + score
+        })
         g.on('over', () => console.log('game over'))
         g.on('nextElementChange', nextEleHandler)
 
         function nextEleHandler (nextEle) {
-            console.log('change')
-            // ctx.clearRect(ctx.canvas.width - 80, 0, 80, 80)
-            // ctx.beginPath()
-            // ctx.drawImage(nextEle.instance, ctx.canvas.width - 80, 0)
+            nextEleCtx.clearRect(0, 0, 80, 80)
+            nextEleCtx.beginPath()
+            nextEleCtx.drawImage(nextEle.instance, 0, 0)
         }
+
+        document.getElementById('leftbtn').onclick = gleft
+        document.getElementById('rightbtn').onclick = gright
+        document.getElementById('changebtn').onclick = gchange
+        document.getElementById('downbtn').onclick = gdown
+
+        function gleft () {g.left()}
+        function gright () {g.right()}
+        function gchange () {g.change()}
+        function gdown () {g.down()}
 
 
         window.addEventListener('keydown', function (e) {
+
+            e.preventDefault()
 
             if (e.keyCode == 32) {
                 g._pause ? g.start() : g.pause()
             }
             
             if (e.keyCode == 37) {
-                g.left()
+                gleft()
             }
             if (e.keyCode == 38) {
-                g.change()
+                gchange()
             }
             if (e.keyCode == 39) {
-                g.right()
+                gright()
             }
             if (e.keyCode == 40) {
-                g.down()
+                gdown()
             }
         })
 
@@ -82,16 +181,16 @@
         hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL})
 
         hammer.on('swipeleft', function (ev) {
-            g.left()
+            gleft()
         })
         hammer.on('swiperight', function () {
-            g.right()
+            gright()
         })
         hammer.on('swipeup', function () {
-            g.change()
+            gchange()
         })
         hammer.on('swipedown', function () {
-            g.down()
+            gdown()
         })
 
     </script>
