@@ -109,17 +109,15 @@
     </div>
 
     <script>
-        // if (navigator.serviceWorker != null) {
-        //     navigator.serviceWorker.register('/tetris/sw.js?_=201712250145')
-        //         .then(function (registration) {
-        //             console.log('Registered events at scope: ', registration.scope)
-        //         })
-        // }
+        if (navigator.serviceWorker != null) {
+            navigator.serviceWorker.register('/tetris/sw.js?_=201712250145')
+                .then(function (registration) {
+                    console.log('Registered events at scope: ', registration.scope)
+                })
+        }
     </script>
 
     <script src="./dist/tetris.min.js"></script>
-    <script src="./dist/hammer.min.js"></script>
-
 
     <script>
         var ctx = document.getElementById('canvas').getContext('2d')
@@ -175,22 +173,6 @@
             if (e.keyCode == 40) {
                 gdown()
             }
-        })
-
-        var hammer = new Hammer(document.getElementById('canvas'))
-        hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL})
-
-        hammer.on('swipeleft', function (ev) {
-            gleft()
-        })
-        hammer.on('swiperight', function () {
-            gright()
-        })
-        hammer.on('swipeup', function () {
-            gchange()
-        })
-        hammer.on('swipedown', function () {
-            gdown()
         })
 
     </script>
