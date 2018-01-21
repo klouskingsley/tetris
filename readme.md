@@ -14,7 +14,7 @@
 
 ```js
 
-var ctx = document.getElementById('canvas')
+var ctx = document.getElementById('canvas').getContext('2d')
 var tetris = new Tetris({ctx: ctx})
 
 tetris.start()
